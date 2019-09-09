@@ -39,12 +39,6 @@ struct ContentView: View {
 ConcentricOnboardingView(pages: <your_pages>, bgColors: <your_colors>, duration: 2.0)
 ```
 
-## Customization
-
-All source code is in one single file called ConcentricOnboardingView.swift. To modify something simply copy this file and apply necessary changes.
-
-<img src="http://i.imgur.com/1JXF60f.gif" height="500">
-
 ## Examples
 
 To try ConcentricOnboarding examples:
@@ -78,7 +72,3 @@ Drop [ConcentricOnboardingView.swift](https://github.com/exyte/ConcentricOnboard
 
 * iOS 13.0+
 * Xcode 11.0 beta 4+
-
-## Author
-
-This project is maintained by [exyte](https://www.exyte.com). We design and build mobile and VR/AR applications.
