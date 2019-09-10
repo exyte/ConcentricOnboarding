@@ -50,21 +50,23 @@ To try ConcentricOnboarding examples:
 
 ## Installation
 
-*CocoaPods*
+### [CocoaPods](http://cocoapods.org)
+
+To install `ConcentricOnboarding`, simply add the following line to your Podfile:
 
 ```ruby
-pod "ConcentricOnboarding"
+pod 'ConcentricOnboarding'
 ```
 
-*Carthage*
+### [Carthage](http://github.com/Carthage/Carthage)
 
-## [Carthage](http://github.com/Carthage/Carthage)
+To integrate `ConcentricOnboarding` into your Xcode project using Carthage, specify it in your `Cartfile`
 
-```ogdl
+```ruby
 github "Exyte/ConcentricOnboarding"
 ```
 
-*Manually*
+### Manually
 
 Drop [ConcentricOnboardingView.swift](https://github.com/exyte/ConcentricOnboarding/blob/master/Source/ConcentricOnboardingView.swift) in your project.
 
