@@ -1,7 +1,7 @@
 <img src="https://github.com/exyte/ConcentricOnboarding/blob/master/header.png">
 <img align="right" src="https://raw.githubusercontent.com/exyte/ConcentricOnboarding/master/demo.gif" width="480" />
 
-<p><h1 align="left">ConcentricOnboarding</h1></p>
+<p><h1 align="left">Concentric Onboarding</h1></p>
 
 <p><h4>SwiftUI library for a walkthrough or onboarding flow with tap actions</h4></p>
 
@@ -72,5 +72,9 @@ Drop [ConcentricOnboardingView.swift](https://github.com/exyte/ConcentricOnboard
 
 ## Requirements
 
-* iOS 13.0+
-* Xcode 11.0 beta 4+
+* iOS 13+
+* Xcode 11+
+
+## Acknowledgements
+
+Many thanks to [Cuberto team](https://dribbble.com/shots/6654320-Animated-Onboarding-Screens) for the design idea and inspiration. 
