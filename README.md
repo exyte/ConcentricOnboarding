@@ -3,7 +3,7 @@
 
 <p><h1 align="left">ConcentricOnboarding</h1></p>
 
-<p><h4>Animated page view control using clean SwiftUI</h4></p>
+<p><h4>SwiftUI library for a walkthrough or onboarding flow with tap actions</h4></p>
 
 ___
 
