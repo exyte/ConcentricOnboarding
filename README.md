@@ -3,12 +3,12 @@
 
 <p><h1 align="left">Concentric Onboarding</h1></p>
 
-<p><h4>SwiftUI library for a walkthrough or onboarding flow with tap actions</h4></p>
+<p><h4>iOS library for a walkthrough or onboarding flow with tap actions written with SwiftUI</h4></p>
 
 ___
 
 <p> We are a development agency building
-  <a href="https://clutch.co/profile/exyte#review-731233">phenomenal</a> apps.</p>
+  <a href="https://clutch.co/profile/exyte#review-731233?utm_medium=referral&utm_source=github.com&utm_campaign=phenomenal_to_clutch">phenomenal</a> apps.</p>
 
 </br>
 
