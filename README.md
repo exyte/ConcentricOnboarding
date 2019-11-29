@@ -3,7 +3,7 @@
 
 <p><h1 align="left">Concentric Onboarding</h1></p>
 
-<p><h4> iOS library for a walkthrough or onboarding flow with tap actions written with SwiftUI</h4></p>
+<p><h4>iOS library for a walkthrough or onboarding flow with tap actions written with SwiftUI</h4></p>
 
 ___
 
