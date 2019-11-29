@@ -1,9 +1,9 @@
 <img src="https://github.com/exyte/ConcentricOnboarding/blob/master/header.png">
 <img align="right" src="https://raw.githubusercontent.com/exyte/ConcentricOnboarding/master/demo.gif" width="480" />
 
-<p><h1 align="left">Concentric Onboarding for iOS</h1></p>
+<p><h1 align="left">Concentric Onboarding</h1></p>
 
-<p><h4>SwiftUI library for a walkthrough or onboarding flow with tap actions</h4></p>
+<p><h4> iOS library for a walkthrough or onboarding flow with tap actions written with SwiftUI</h4></p>
 
 ___
 
