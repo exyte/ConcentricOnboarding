@@ -37,10 +37,14 @@ class ObservableInt: ObservableObject {
 }
 
 public struct ConcentricOnboardingView : View {
+
     public var animationWillBegin = {}
     public var animationDidEnd = {}
     public var didGoToLastPage = {}
+    public var insteadOfCyclingToFirstPage: (()->())? // replaces default navigation to first page after pressing next on last page
+    public var insteadOfCyclingToLastPage: (()->())? // replaces default navigation to last page after pressing prev on first page while navigating backwards
     public var didPressNextButton: (()->())? // replaces default button action with user's custom closure
+
     public var currentPageIndex: Int {
         return currentIndex.value
     }
@@ -121,7 +125,7 @@ public struct ConcentricOnboardingView : View {
                     if let block = self.didPressNextButton {
                         block()
                     } else {
-                        self.goToNextPageAnimated()
+                        self.goToNextPage(animated: true)
                     }
                 }) { shape }
 
@@ -192,7 +196,7 @@ public struct ConcentricOnboardingView : View {
         else {
             isAnimating.value = false
             progress = 0
-            goToNextPageUnanimated()
+            goToNextPage(animated: false)
         }
     }
 
@@ -279,11 +283,19 @@ public struct ConcentricOnboardingView : View {
     }
 
     public func goToNextPage(animated: Bool = true) {
-        animated ? goToNextPageAnimated() : goToNextPageUnanimated()
+        if currentIndex.value == pages.count - 1, let block = insteadOfCyclingToFirstPage {
+            block()
+        } else {
+            animated ? goToNextPageAnimated() : goToNextPageUnanimated()
+        }
     }
 
     public func goToPreviousPage(animated: Bool = true) {
-        animated ? goToPrevPageAnimated() : goToPrevPageUnanimated()
+        if currentIndex.value == 0, let block = insteadOfCyclingToLastPage {
+            block()
+        } else {
+            animated ? goToPrevPageAnimated() : goToPrevPageUnanimated()
+        }
     }
 
     // helpers
