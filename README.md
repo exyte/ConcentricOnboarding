@@ -38,7 +38,22 @@ struct ContentView: View {
 ```swift
 ConcentricOnboardingView(pages: <your_pages>, bgColors: <your_colors>, duration: 2.0)
 ```
+  
+### Public interface    
+`currentPageIndex` - read only property to check what page index you are currently on     
+  
+`goToNextPage(animated: Bool = true)` - call this method manually if you need to  
+`goToPreviousPage(animated: Bool = true)` - call this method manually if you need to  
+  
+### Assignable closures    
 
+`animationWillBegin` - called before animation starts  
+`animationDidEnd` - called after animation ends  
+`didGoToLastPage` - called after animation leading to last page ends  
+`insteadOfCyclingToFirstPage` - replaces default navigation to first page after pressing next on last page  
+`insteadOfCyclingToLastPage` - replaces default navigation to last page after pressing prev on first page while navigating backwards  
+`didPressNextButton` - replaces default button action with user's custom closure  
+  
 ## Examples
 
 To try ConcentricOnboarding examples:
