@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B7DF30623168CEC00C30829 /* ConcentricOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DF30323168CEC00C30829 /* ConcentricOnboardingView.swift */; };
-		5B7DF30723168CEC00C30829 /* ConcentricOnboarding.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7DF30423168CEC00C30829 /* ConcentricOnboarding.h */; };
-		5B7DF30823168CEC00C30829 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B7DF30523168CEC00C30829 /* Info.plist */; };
+		5BDFADCD2498A8E700400561 /* ConcentricOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDFADCA2498A8E700400561 /* ConcentricOnboardingView.swift */; };
+		5BDFADCE2498A8E700400561 /* ConcentricOnboarding.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BDFADCB2498A8E700400561 /* ConcentricOnboarding.h */; };
+		5BDFADCF2498A8E700400561 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BDFADCC2498A8E700400561 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5B7DF2D12316848800C30829 /* ConcentricOnboarding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConcentricOnboarding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B7DF30323168CEC00C30829 /* ConcentricOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcentricOnboardingView.swift; sourceTree = "<group>"; };
-		5B7DF30423168CEC00C30829 /* ConcentricOnboarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcentricOnboarding.h; sourceTree = "<group>"; };
-		5B7DF30523168CEC00C30829 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5BDFADCA2498A8E700400561 /* ConcentricOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcentricOnboardingView.swift; sourceTree = "<group>"; };
+		5BDFADCB2498A8E700400561 /* ConcentricOnboarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcentricOnboarding.h; sourceTree = "<group>"; };
+		5BDFADCC2498A8E700400561 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,7 +33,7 @@
 		5B7DF2C72316848800C30829 = {
 			isa = PBXGroup;
 			children = (
-				5B7DF30223168CEC00C30829 /* Source */,
+				5BDFADC82498A8E700400561 /* Sources */,
 				5B7DF2D22316848800C30829 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,14 +46,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5B7DF30223168CEC00C30829 /* Source */ = {
+		5BDFADC82498A8E700400561 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				5B7DF30323168CEC00C30829 /* ConcentricOnboardingView.swift */,
-				5B7DF30423168CEC00C30829 /* ConcentricOnboarding.h */,
-				5B7DF30523168CEC00C30829 /* Info.plist */,
+				5BDFADC92498A8E700400561 /* ConcentricOnboarding */,
 			);
-			path = Source;
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		5BDFADC92498A8E700400561 /* ConcentricOnboarding */ = {
+			isa = PBXGroup;
+			children = (
+				5BDFADCA2498A8E700400561 /* ConcentricOnboardingView.swift */,
+				5BDFADCB2498A8E700400561 /* ConcentricOnboarding.h */,
+				5BDFADCC2498A8E700400561 /* Info.plist */,
+			);
+			path = ConcentricOnboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -63,7 +71,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B7DF30723168CEC00C30829 /* ConcentricOnboarding.h in Headers */,
+				5BDFADCE2498A8E700400561 /* ConcentricOnboarding.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B7DF30823168CEC00C30829 /* Info.plist in Resources */,
+				5BDFADCF2498A8E700400561 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B7DF30623168CEC00C30829 /* ConcentricOnboardingView.swift in Sources */,
+				5BDFADCD2498A8E700400561 /* ConcentricOnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
