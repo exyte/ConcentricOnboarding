@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5BDFADCD2498A8E700400561 /* ConcentricOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDFADCA2498A8E700400561 /* ConcentricOnboardingView.swift */; };
-		5BDFADCE2498A8E700400561 /* ConcentricOnboarding.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BDFADCB2498A8E700400561 /* ConcentricOnboarding.h */; };
-		5BDFADCF2498A8E700400561 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BDFADCC2498A8E700400561 /* Info.plist */; };
+		5BDFADCE2498A8E700400561 /* ConcentricOnboarding.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BDFADCB2498A8E700400561 /* ConcentricOnboarding.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,7 +133,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BDFADCF2498A8E700400561 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +279,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = ConcentricOnboarding/Info.plist;
+				INFOPLIST_FILE = Sources/ConcentricOnboarding/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -306,7 +304,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = ConcentricOnboarding/Info.plist;
+				INFOPLIST_FILE = Sources/ConcentricOnboarding/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
