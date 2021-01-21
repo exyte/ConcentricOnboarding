@@ -70,13 +70,15 @@ public struct ConcentricOnboardingView : View {
     @State var progress: Double = 0
     @State var bgColor = Color.white
     @State var circleColor = Color.white
+    let nextIcon:String // the default icon is the cupertino next Icon button which is "chevron.forward but it can be change from the prop.
 
     @State var shape = AnyView(Circle())
 
-    public init(pages: [AnyView], bgColors: [Color], duration: Double = 1.0) {
+    public init(pages: [AnyView], bgColors: [Color], duration: Double = 1.0, nextIcon:String = "chevron.forward") {
         self.pages = pages
         self.bgColors = bgColors
         self.duration = duration
+        self.nextIcon = nextIcon
     }
 
     func viewWillAppear() {
@@ -130,9 +132,10 @@ public struct ConcentricOnboardingView : View {
                 }) { shape }
 
                 if !isAnimating.value {
-                    Image("arrow")
+                     Image(systemName: nextIcon)
                         .resizable()
-                        .frame(width: 7, height: 12)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 10, height: 20)
                         .foregroundColor(bgColor)
                 }
             }
