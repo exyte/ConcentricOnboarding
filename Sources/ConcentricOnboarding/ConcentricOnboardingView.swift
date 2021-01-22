@@ -44,7 +44,7 @@ public struct ConcentricOnboardingView : View {
     public var insteadOfCyclingToFirstPage: (()->())? // replaces default navigation to first page after pressing next on last page
     public var insteadOfCyclingToLastPage: (()->())? // replaces default navigation to last page after pressing prev on first page while navigating backwards
     public var didPressNextButton: (()->())? // replaces default button action with user's custom closure
-    
+
     public var currentPageIndex: Int {
         return currentIndex.value
     }
@@ -61,7 +61,7 @@ public struct ConcentricOnboardingView : View {
     let pages: [AnyView]
     let bgColors: [Color]
     let duration: Double // in seconds
-    
+
     @ObservedObject var currentIndex = ObservableInt()
     @ObservedObject var nextIndex = ObservableInt(1)
     @ObservedObject var isAnimating = ObservableBool()
@@ -72,13 +72,11 @@ public struct ConcentricOnboardingView : View {
     @State var circleColor = Color.white
 
     @State var shape = AnyView(Circle())
-    let nextIcon: String // the default icon is "chevron.forward", use constructor argument to change
 
-    public init(pages: [AnyView], bgColors: [Color], duration: Double = 1.0, nextIcon: String = "chevron.forward") {
+    public init(pages: [AnyView], bgColors: [Color], duration: Double = 1.0) {
         self.pages = pages
         self.bgColors = bgColors
         self.duration = duration
-        self.nextIcon = nextIcon
     }
 
     func viewWillAppear() {
@@ -132,10 +130,9 @@ public struct ConcentricOnboardingView : View {
                 }) { shape }
 
                 if !isAnimating.value {
-                    Image(systemName: nextIcon)
+                    Image("arrow")
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 10, height: 20)
+                        .frame(width: 7, height: 12)
                         .foregroundColor(bgColor)
                 }
             }
@@ -302,7 +299,7 @@ public struct ConcentricOnboardingView : View {
     }
 
     // helpers
-    
+
     func easingInProgressFor(time t: Double) -> Double {
         return t * t
     }
