@@ -5,6 +5,7 @@
 //  Created by Alisa Mylnikova on 30/07/2019.
 //  Copyright © 2019 Exyte. All rights reserved.
 //
+
 import SwiftUI
 
 class ObservableBool: ObservableObject {
@@ -43,6 +44,7 @@ public struct ConcentricOnboardingView : View {
     public var insteadOfCyclingToFirstPage: (()->())? // replaces default navigation to first page after pressing next on last page
     public var insteadOfCyclingToLastPage: (()->())? // replaces default navigation to last page after pressing prev on first page while navigating backwards
     public var didPressNextButton: (()->())? // replaces default button action with user's custom closure
+    
     public var currentPageIndex: Int {
         return currentIndex.value
     }
