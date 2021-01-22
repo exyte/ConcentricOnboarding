@@ -77,7 +77,6 @@ public struct ConcentricOnboardingView : View {
         self.bgColors = bgColors
         self.duration = duration
         self.nextIcon = nextIcon
-
     }
 
     func viewWillAppear() {
