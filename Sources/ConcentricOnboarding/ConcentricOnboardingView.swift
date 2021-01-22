@@ -61,6 +61,7 @@ public struct ConcentricOnboardingView : View {
     let pages: [AnyView]
     let bgColors: [Color]
     let duration: Double // in seconds
+    
     @ObservedObject var currentIndex = ObservableInt()
     @ObservedObject var nextIndex = ObservableInt(1)
     @ObservedObject var isAnimating = ObservableBool()
