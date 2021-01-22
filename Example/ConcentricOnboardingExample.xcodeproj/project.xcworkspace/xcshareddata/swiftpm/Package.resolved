@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ConcentricOnboarding",
+        "repositoryURL": "git@github.com:exyte/ConcentricOnboarding.git",
+        "state": {
+          "branch": null,
+          "revision": "793045889f48aea5af2d67d855714af10a1c835f",
+          "version": "0.0.4"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

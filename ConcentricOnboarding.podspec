@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "ConcentricOnboarding"
-  s.version          = "0.0.5"
+  s.version          = "0.0.6"
   s.summary          = "SwiftUI library for a walkthrough or onboarding flow with tap actions"
 
   s.homepage         = 'https://github.com/exyte/ConcentricOnboarding.git'
