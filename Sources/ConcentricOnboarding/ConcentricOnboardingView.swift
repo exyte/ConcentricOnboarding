@@ -73,7 +73,6 @@ public struct ConcentricOnboardingView : View {
     @State var shape = AnyView(Circle())
     let nextIcon: String // the default icon is "chevron.forward", use constructor argument to change
 
-
     public init(pages: [AnyView], bgColors: [Color], duration: Double = 1.0, nextIcon: String = "chevron.forward") {
         self.pages = pages
         self.bgColors = bgColors
@@ -302,6 +301,7 @@ public struct ConcentricOnboardingView : View {
     }
 
     // helpers
+    
     func easingInProgressFor(time t: Double) -> Double {
         return t * t
     }
@@ -326,3 +326,4 @@ public struct ConcentricOnboardingView : View {
         }
     }
 }
+
