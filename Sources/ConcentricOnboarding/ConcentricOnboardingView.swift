@@ -54,7 +54,8 @@ public struct ConcentricOnboardingView<Content>: View, Animatable where Content:
     /// animation's settings
     private let radius: Double = 30
     private let limit: Double = 15
-    
+    private var inAnimation: Animation { .easeIn(duration: duration / 2) }
+    private var outAnimation: Animation { .easeOut(duration: duration / 2) }
     private var fullAnimation: Animation { .easeInOut(duration: duration) }
     
     public init(pageContents: [PageContent]) {
@@ -77,17 +78,10 @@ public struct ConcentricOnboardingView<Content>: View, Animatable where Content:
         mainContent
             .edgesIgnoringSafeArea(.vertical)
             .onChange(of: currentIndex) { _ in
-                didChangeCurrentPage?(currentIndex)
-                if currentIndex == pageContents.count - 1 {
-                    didGoToLastPage()
-                }
+                currentPageChanged()
             }
             .onAnimationCompleted(for: progress) {
-                direction == .forward ? goToNextPageUnanimated() : goToPrevPageUnanimated()
-                animationDidEnd()
-            }
-            .onAnimationHalfCompleted(for: progress, targetValue: limit) {
-                updateColors(forNextPage: true)
+                animationCompleted()
             }
     }
     
@@ -114,6 +108,7 @@ public struct ConcentricOnboardingView<Content>: View, Animatable where Content:
                 nextImage
             }
         }
+        .disabled(isAnimated)
         .offset(y: 300)
     }
     
@@ -175,6 +170,24 @@ public struct ConcentricOnboardingView<Content>: View, Animatable where Content:
         }
     }
     
+    private func currentPageChanged() {
+        didChangeCurrentPage?(currentIndex)
+        if currentIndex == pageContents.count - 1 {
+            didGoToLastPage()
+        }
+    }
+    
+    private func animationCompleted() {
+        if progress == limit {
+            progress += 0.001
+            withAnimation(outAnimation) { progress = 2 * limit }
+            updateColors(forNextPage: true)
+        } else if progress == 2 * limit {
+            direction == .forward ? goToNextPageUnanimated() : goToPrevPageUnanimated()
+            animationDidEnd()
+        }
+    }
+    
     // MARK: - Next / Prev actions
     
     private func goToNextPageAnimated() {
@@ -210,7 +223,7 @@ public struct ConcentricOnboardingView<Content>: View, Animatable where Content:
         isAnimated = true
         updateColors()
         progress = 0
-        withAnimation(fullAnimation) { progress = 2 * limit }
+        withAnimation(inAnimation) { progress = limit }
     }
     
     private func updateColors(forNextPage: Bool = false) {
