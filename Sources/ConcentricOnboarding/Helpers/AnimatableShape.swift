@@ -42,9 +42,8 @@ struct AnimatableShape: Shape {
             center = CGPoint(x: UIScreen.main.bounds.width / 2 - r + delta, y: UIScreen.main.bounds.height / 2)
         }
         
-        let endAngle: Angle = .radians((type == .growing ? -1 : 1) * .pi * 2)
         return Path { path in
-            path.addArc(center: center, radius: r, startAngle: .radians(0), endAngle: endAngle, clockwise: type == .growing)
+            path.addArc(center: center, radius: r, startAngle: .radians(0), endAngle: .radians(.pi * 2), clockwise: true)
         }
     }
     
@@ -52,17 +51,17 @@ struct AnimatableShape: Shape {
     
     private func localValues() -> (type: AnimationType, progress: Double) {
         if direction == .forward {
-            if progress < limit {
+            if progress <= limit {
                 return (.growing, progress)
-            } else if progress < 2 * limit {
+            } else if progress <= 2 * limit {
                 return (.shrinking, progress - limit)
             } else {
                 return (.growing, 0)
             }
         } else {
-            if progress < limit {
+            if progress <= limit {
                 return (.shrinking, limit - progress)
-            } else if progress < 2 * limit {
+            } else if progress <= 2 * limit {
                 return (.growing, 2 * limit - progress)
             } else {
                 return (.shrinking, 0)
