@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
 	name: "ConcentricOnboarding",
 	platforms: [
-        .iOS(.v13)
+        .iOS(.v14)
     ],
     products: [
     	.library(

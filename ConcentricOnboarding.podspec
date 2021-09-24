@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/exyte/ConcentricOnboarding.git', :tag => s.version.to_s }
   s.social_media_url = 'http://exyte.com'
 
-  s.ios.deployment_target = '13.0'
+  s.ios.deployment_target = '14.0'
   s.requires_arc = true
   s.swift_version = "5.0"
 
