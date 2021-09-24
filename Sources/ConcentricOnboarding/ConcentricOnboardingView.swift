@@ -8,323 +8,289 @@
 
 import SwiftUI
 
-class ObservableBool: ObservableObject {
-    @Published var value: Bool {
-        didSet {
-            didSet?()
-        }
-    }
-
-    var didSet: (()->())?
-
-    init(_ value: Bool = false) {
-        self.value = value
-    }
+enum Direction {
+    case forward, backward
 }
 
-class ObservableInt: ObservableObject {
-    @Published var value: Int {
-        didSet {
-            didSet?()
+public struct ConcentricOnboardingView<Content>: View, Animatable where Content: View {
+    
+    public typealias PageContent = (view: Content, background: Color)
+    
+    let pageContents: [PageContent]
+    
+    @State private var currentIndex: Int = 0
+    @State private var nextIndex: Int = 1
+    @State private var progress: Double = 0
+    @State private var direction: Direction = .forward
+    @State private var isAnimated: Bool = false
+    @State private var circleColor: Color = .clear
+    @State private var backgroundColor: Color = .clear
+    
+    /// defaults setups, will be change via modifiers
+    private var nextIcon: String = "chevron.forward"
+    private var duration: Double = 1.0
+    
+    /// called before animation starts
+    private var animationWillBegin: () -> Void = { }
+    
+    /// called after animation ends
+    private var animationDidEnd: () -> Void = { }
+    
+    /// called after animation leading to last page ends
+    private var didGoToLastPage: () -> Void = { }
+    
+    /// replaces default navigation to first page after pressing next on last page
+    private var insteadOfCyclingToFirstPage: (() -> Void)?
+    
+    /// replaces default navigation to last page after pressing prev on first page while navigating backwards
+    private var insteadOfCyclingToLastPage: (() -> Void)?
+    
+    /// replaces default button action with user's custom closure
+    private var didPressNextButton: (() -> Void)?
+    
+    /// replaces default button action with user's custom closure
+    private var didChangeCurrentPage: ((Int) -> Void)?
+    
+    /// animation's settings
+    private let radius: Double = 30
+    private let limit: Double = 15
+    
+    private var fullAnimation: Animation { .easeInOut(duration: duration) }
+    
+    public init(pageContents: [PageContent]) {
+        self.pageContents = pageContents
+        
+        if pageContents.indices.contains(0) {
+            _backgroundColor = State(initialValue: pageContents[0].background)
         }
-    }
-
-    var didSet: (()->())?
-
-    init(_ value: Int = 0) {
-        self.value = value
-    }
-}
-
-public struct ConcentricOnboardingView : View {
-
-    public var animationWillBegin = {}
-    public var animationDidEnd = {}
-    public var didGoToLastPage = {}
-    public var insteadOfCyclingToFirstPage: (()->())? // replaces default navigation to first page after pressing next on last page
-    public var insteadOfCyclingToLastPage: (()->())? // replaces default navigation to last page after pressing prev on first page while navigating backwards
-    public var didPressNextButton: (()->())? // replaces default button action with user's custom closure
-
-    public var currentPageIndex: Int {
-        return currentIndex.value
-    }
-
-    let radius: Double = 30
-    let limit: Double = 15
-
-    static let timerStep = 0.02
-    let timer = Timer.publish(every: timerStep, on: .current, in: .common).autoconnect()
-    var step: Double {
-        2*limit / (duration / ConcentricOnboardingView.timerStep)
-    }
-
-    let pages: [AnyView]
-    let bgColors: [Color]
-    let duration: Double // in seconds
-
-    @ObservedObject var currentIndex = ObservableInt()
-    @ObservedObject var nextIndex = ObservableInt(1)
-    @ObservedObject var isAnimating = ObservableBool()
-    @ObservedObject var isAnimatingForward = ObservableBool(true)
-
-    @State var progress: Double = 0
-    @State var bgColor = Color.white
-    @State var circleColor = Color.white
-
-    @State var shape = AnyView(Circle())
-    let nextIcon: String // the default icon is "chevron.forward", use constructor argument to change
-
-    public init(pages: [AnyView], bgColors: [Color], duration: Double = 1.0, nextIcon: String = "chevron.forward") {
-        self.pages = pages
-        self.bgColors = bgColors
-        self.duration = duration
-        self.nextIcon = nextIcon
-    }
-
-    func viewWillAppear() {
-        if bgColors.count != pages.count {
-            print("Pages count should be the same as bg colors")
+        
+        if pageContents.indices.contains(1) {
+            _circleColor = State(initialValue: pageContents[1].background)
         }
-        if pages.count < 2 {
-            print("Add more pages")
-        }
-        if bgColors.count < 2 {
-            print("Add more bg colors")
-        }
-
-        if bgColors.count > currentIndex.value {
-            bgColor = bgColors[currentIndex.value]
-        }
-        if bgColors.count > nextIndex.value {
-            circleColor = bgColors[nextIndex.value]
-        }
-        let width = CGFloat(radius * 2)
-        shape = AnyView(Circle().foregroundColor(circleColor).frame(width: width, height: width, alignment: .center))
-
-        isAnimating.didSet = {
-            if self.isAnimating.value && (self.pages.count < 2 || self.bgColors.count < 2) {
-                self.isAnimating.value = false
-            } else {
-                self.isAnimating.value ? self.animationWillBegin() : self.animationDidEnd()
-            }
-        }
-
-        currentIndex.didSet = {
-            if self.currentIndex.value == self.pages.count - 1 {
-                self.didGoToLastPage()
-            }
-        }
-    }
-
-
-    public var body: some View {
-
-        let mainView = ZStack {
-            bgColor
-
-            ZStack {
-                Button(action: {
-                    if let block = self.didPressNextButton {
-                        block()
-                    } else {
-                        self.goToNextPage(animated: true)
-                    }
-                }) { shape }
-
-                if !isAnimating.value {
-                    Image(systemName: nextIcon)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 10, height: 20)
-                        .foregroundColor(bgColor)
-                }
-            }
-            .offset(y: 300)
-
-            currentPages()
-                .offset(y: -50)
-        }
-        .edgesIgnoringSafeArea(.vertical)
-        .onReceive(timer) { _ in
-            if !self.isAnimating.value {
-                return
-            }
-            self.isAnimatingForward.value ? self.refreshAnimatingViewsForward() : self.refreshAnimatingViewsBackward()
-        }
-
-        return mainView
-            .onAppear() {
-                self.viewWillAppear()
-            }
-    }
-
-    func createGrowingShape(_ progress: Double) -> AnyView {
-        let r = CGFloat(radius + pow(2, progress))
-        let d = r*2
-        let delta = CGFloat((1 - progress/limit) * radius)
-        if progress > 10 {
-        return AnyView(Path { b in
-            b.addArc(center: CGPoint(x: UIScreen.main.bounds.width/2 + r + CGFloat(radius) - delta, y: UIScreen.main.bounds.height/2), radius: r, startAngle: Angle(radians: -.pi/2), endAngle: Angle(radians: .pi/2), clockwise: true)
-            }.foregroundColor(circleColor))
-        } else {
-            return AnyView(Circle().foregroundColor(circleColor).position(x: d-delta, y: r).frame(width: d, height: d))
-        }
-    }
-
-    func createShrinkingShape(_ progress: Double) -> AnyView {
-        let r = CGFloat(radius + pow(2, (limit - progress)))
-        let d = r*2
-        let delta = CGFloat(progress/limit * radius)
-        if progress < limit - 10 {
-            return AnyView(Path { b in
-                b.addArc(center: CGPoint(x: UIScreen.main.bounds.width/2 - r + CGFloat(radius) + delta, y: UIScreen.main.bounds.height/2), radius: r, startAngle: Angle(radians: -.pi/2), endAngle: Angle(radians: .pi/2), clockwise: false)
-            }.foregroundColor(circleColor))
-        } else {
-            return AnyView(Circle().foregroundColor(circleColor).position(x: delta, y: r).frame(width: d, height: d))
+        
+        if pageContents.count < 2 {
+            print("Warning: Add more pages.")
         }
     }
     
-    func refreshAnimatingViewsForward() {
-        progress += step
-        if progress < limit {
-            bgColor = bgColors[currentIndex.value]
-            circleColor = bgColors[nextIndex.value]
-            shape = createGrowingShape(progress)
-        }
-        else if progress < 2*limit {
-            bgColor = bgColors[nextIndex.value]
-            circleColor = bgColors[currentIndex.value]
-            shape = createShrinkingShape(progress - limit)
-        }
-        else {
-            isAnimating.value = false
-            progress = 0
-            goToNextPage(animated: false)
+    public var body: some View {
+        mainContent
+            .edgesIgnoringSafeArea(.vertical)
+            .onChange(of: currentIndex) { _ in
+                didChangeCurrentPage?(currentIndex)
+                if currentIndex == pageContents.count - 1 {
+                    didGoToLastPage()
+                }
+            }
+            .onAnimationCompleted(for: progress) {
+                direction == .forward ? goToNextPageUnanimated() : goToPrevPageUnanimated()
+                animationDidEnd()
+            }
+            .onAnimationHalfCompleted(for: progress, targetValue: limit) {
+                updateColors(forNextPage: true)
+            }
+    }
+    
+    // MARK: - Private
+    
+    private var mainContent: some View {
+        ZStack {
+            backgroundColor
+            currentPages
+            button
         }
     }
-
-    func refreshAnimatingViewsBackward() {
-        progress += step
-        let backwardProgress = 2*limit - progress
-        if progress < limit {
-            bgColor = bgColors[currentIndex.value]
-            circleColor = bgColors[nextIndex.value]
-            shape = createShrinkingShape(backwardProgress - limit)
-        }
-        else if progress < 2*limit {
-            bgColor = bgColors[nextIndex.value]
-            circleColor = bgColors[currentIndex.value]
-            shape = createGrowingShape(backwardProgress)
-        }
-        else {
-            isAnimating.value = false
-            progress = 0
-            goToPrevPageUnanimated()
-        }
+    
+    private var shape: some View {
+        AnimatableShape(progress: progress, radius: radius, limit: limit, direction: direction)
+            .foregroundColor(circleColor)
+            .frame(width: UIScreen.main.bounds.width)
     }
-
-    func currentPages() -> some View {
-        let maxXOffset = 600.0
-        let maxYOffset = 40.0
-        let currentPageOffset = easingOutProgressFor(time: progress/limit/2)
-        let nextPageOffset = easingInProgressFor(time: 1 - progress/limit/2)
-        let coeff: CGFloat = isAnimatingForward.value ? -1 : 1
-
-        var reverseScaleFactor = 1 - nextPageOffset/3
-        if reverseScaleFactor == 0 {
-            reverseScaleFactor = 1
+    
+    private var button: some View {
+        Button(action: tapAction) {
+            ZStack {
+                shape
+                nextImage
+            }
         }
-
+        .offset(y: 300)
+    }
+    
+    private var nextImage: some View {
+        Image(systemName: nextIcon)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 10, height: 20)
+            .foregroundColor(backgroundColor)
+    }
+    
+    private var currentPages: some View {
+        let maxXOffset: CGFloat = 600.0
+        let maxYOffset: CGFloat = 40.0
+        let coeff: CGFloat = direction == .forward ? -1 : 3
+        
         return ZStack {
-            if pages.count > 0 { pages[currentIndex.value]
-                //swap effects order to create another animation
-                .scaleEffect(CGFloat(1 - currentPageOffset/3))
-                .offset(x: coeff * CGFloat(maxXOffset * currentPageOffset),
-                        y: CGFloat(maxYOffset * currentPageOffset))
+            if pageContents.count > 0 {
+                pageContents[currentIndex].view
+                    .scaleEffect(isAnimated ? 2 / 3 : 1)
+                    .offset(x: isAnimated ? coeff * maxXOffset : 0,
+                            y: isAnimated ? maxYOffset : 0)
+                    .animation(isAnimated ? fullAnimation : .none)
             }
-
-            if pages.count > 1 { pages[nextIndex.value]
-                .scaleEffect(CGFloat(reverseScaleFactor))
-                .offset(x: -coeff * CGFloat(maxXOffset * nextPageOffset),
-                        y: CGFloat(maxYOffset * nextPageOffset))
+            
+            if pageContents.count > 1 {
+                pageContents[nextIndex].view
+                    .scaleEffect(isAnimated ? 1 : 2 / 3)
+                    .offset(x: isAnimated ? 0 : -coeff * maxXOffset,
+                            y: isAnimated ? 0 : maxYOffset)
+                    .animation(isAnimated ? fullAnimation : .none)
             }
         }
     }
-
-    func updateColors() {
-        let width = CGFloat(radius * 2)
-        shape = AnyView(Circle().foregroundColor(circleColor).frame(width: width, height: width, alignment: .center))
-
-        bgColor = bgColors[currentIndex.value]
-        circleColor = bgColors[nextIndex.value]
-    }
-
-    func goToNextPageAnimated() {
-        isAnimatingForward.value = true
-        nextIndex.value = moveIndexForward(currentIndex.value)
-        isAnimating.value = true
-    }
-
-    func goToNextPageUnanimated() {
-        isAnimatingForward.value = true
-        currentIndex.value = moveIndexForward(currentIndex.value)
-        nextIndex.value = moveIndexForward(currentIndex.value)
-        updateColors()
-    }
-
-    func goToPrevPageAnimated() {
-        isAnimatingForward.value = false
-        nextIndex.value = moveIndexBackward(currentIndex.value)
-        isAnimating.value = true
-    }
-
-    func goToPrevPageUnanimated() {
-        isAnimatingForward.value = false
-        currentIndex.value = moveIndexBackward(currentIndex.value)
-        nextIndex.value = moveIndexBackward(currentIndex.value)
-        updateColors()
-    }
-
+    
     public func goToNextPage(animated: Bool = true) {
-        if currentIndex.value == pages.count - 1, let block = insteadOfCyclingToFirstPage {
+        if let block = insteadOfCyclingToFirstPage, currentIndex == pageContents.count - 1 {
             block()
         } else {
             animated ? goToNextPageAnimated() : goToNextPageUnanimated()
         }
     }
-
+    
     public func goToPreviousPage(animated: Bool = true) {
-        if currentIndex.value == 0, let block = insteadOfCyclingToLastPage {
+        if let block = insteadOfCyclingToLastPage, currentIndex == 0 {
             block()
         } else {
             animated ? goToPrevPageAnimated() : goToPrevPageUnanimated()
         }
     }
-
-    // helpers
-
-    func easingInProgressFor(time t: Double) -> Double {
-        return t * t
-    }
-
-    func easingOutProgressFor(time t: Double) -> Double {
-        return -(t * (t - 2))
-    }
-
-    func moveIndexForward(_ index: Int) -> Int {
-        if index + 1 < pages.count {
-            return index + 1
+    
+    // MARK: -
+    
+    private func tapAction() {
+        if let block = didPressNextButton {
+            block()
         } else {
-            return 0
+            goToNextPage(animated: true)
         }
     }
-
-    func moveIndexBackward(_ index: Int) -> Int {
-        if index - 1 >= 0 {
-            return index - 1
-        } else {
-            return pages.count - 1
-        }
+    
+    // MARK: - Next / Prev actions
+    
+    private func goToNextPageAnimated() {
+        direction = .forward
+        nextIndex = moveIndexForward(currentIndex)
+        startAnimation()
+    }
+    
+    private func goToNextPageUnanimated() {
+        isAnimated = false
+        direction = .forward
+        currentIndex = moveIndexForward(currentIndex)
+        nextIndex = moveIndexForward(currentIndex)
+        progress = 0
+    }
+    
+    private func goToPrevPageAnimated() {
+        direction = .backward
+        nextIndex = moveIndexBackward(currentIndex)
+        startAnimation()
+    }
+    
+    private func goToPrevPageUnanimated() {
+        isAnimated = false
+        direction = .backward
+        currentIndex = moveIndexBackward(currentIndex)
+        nextIndex = moveIndexBackward(currentIndex)
+        progress = 0
+    }
+    
+    private func startAnimation() {
+        animationWillBegin()
+        isAnimated = true
+        updateColors()
+        progress = 0
+        withAnimation(fullAnimation) { progress = 2 * limit }
+    }
+    
+    private func updateColors(forNextPage: Bool = false) {
+        backgroundColor = pageContents[forNextPage ? nextIndex : currentIndex].background
+        circleColor = pageContents[forNextPage ? currentIndex : nextIndex].background
+    }
+    
+    // MARK: - Helpers
+    
+    private func moveIndexForward(_ index: Int) -> Int {
+        index + 1 < pageContents.count ? index + 1 : 0
+    }
+    
+    private func moveIndexBackward(_ index: Int) -> Int {
+        index - 1 >= 0 ? index - 1 : pageContents.count - 1
     }
 }
 
+// MARK: -
+
+extension ConcentricOnboardingView {
+    
+    public func duration(_ timeInterval: Double) -> ConcentricOnboardingView {
+        var concentricOnboardingView = self
+        concentricOnboardingView.duration = timeInterval
+        return concentricOnboardingView
+    }
+    
+    public func nextIcon(_ iconName: String) -> ConcentricOnboardingView {
+        var concentricOnboardingView = self
+        concentricOnboardingView.nextIcon = iconName
+        return concentricOnboardingView
+    }
+}
+
+// MARK: - Closures
+
+extension ConcentricOnboardingView {
+    
+    public func animationWillBegin(perform: @escaping () -> Void) -> ConcentricOnboardingView {
+        var concentricOnboardingView = self
+        concentricOnboardingView.animationWillBegin = perform
+        return concentricOnboardingView
+    }
+    
+    public func animationDidEnd(perform: @escaping () -> Void) -> ConcentricOnboardingView {
+        var concentricOnboardingView = self
+        concentricOnboardingView.animationDidEnd = perform
+        return concentricOnboardingView
+    }
+    
+    public func didGoToLastPage(perform: @escaping () -> Void) -> ConcentricOnboardingView {
+        var concentricOnboardingView = self
+        concentricOnboardingView.didGoToLastPage = perform
+        return concentricOnboardingView
+    }
+    
+    // MARK: - Optional methods
+    
+    public func insteadOfCyclingToFirstPage(perform: @escaping () -> Void) -> ConcentricOnboardingView {
+        var concentricOnboardingView = self
+        concentricOnboardingView.insteadOfCyclingToFirstPage = perform
+        return concentricOnboardingView
+    }
+    
+    public func insteadOfCyclingToLastPage(perform: @escaping () -> Void) -> ConcentricOnboardingView {
+        var concentricOnboardingView = self
+        concentricOnboardingView.insteadOfCyclingToLastPage = perform
+        return concentricOnboardingView
+    }
+    
+    public func didPressNextButton(perform: @escaping () -> Void) -> ConcentricOnboardingView {
+        var concentricOnboardingView = self
+        concentricOnboardingView.didPressNextButton = perform
+        return concentricOnboardingView
+    }
+    
+    public func didChangeCurrentPage(perform: @escaping (Int) -> Void) -> ConcentricOnboardingView {
+        var concentricOnboardingView = self
+        concentricOnboardingView.didChangeCurrentPage = perform
+        return concentricOnboardingView
+    }
+}

@@ -25,34 +25,40 @@ ___
 # Usage
 1. Create `View`'s descendant class for your pages.
 2. Create at least two pages and fill them with content.
-3. Create an array of colors (same number as pages).
+3. Create an array of tuple - (page, background color).
 4. Create ConcentricOnboardingView and place it in your view hierarchy.
 ```swift
 struct ContentView: View {
     var body: some View {
-        return ConcentricOnboardingView(pages: <your_pages>, bgColors: <your_colors>)
+        return ConcentricOnboardingView(pageContents: [<your_page>, <your_background_color>])
     }
 }
 ```
 5. Pass duration as an argument if you want animation to be faster/slower
 ```swift
-ConcentricOnboardingView(pages: <your_pages>, bgColors: <your_colors>, duration: 2.0)
+ConcentricOnboardingView(pageContents: [<your_page>, <your_background_color>])
+	.(duration: 2.0)
+```
+
+6. Pass icon name as an argument if you want to change default icon on the button 
+```swift
+ConcentricOnboardingView(pageContents: [<your_page>, <your_background_color>])
+	.(nextIcon: "chevron.forward")
 ```
   
 ### Public interface    
-`currentPageIndex` - read only property to check what page index you are currently on     
-  
 `goToNextPage(animated: Bool = true)` - call this method manually if you need to  
 `goToPreviousPage(animated: Bool = true)` - call this method manually if you need to  
   
 ### Assignable closures    
 
-`animationWillBegin` - called before animation starts  
-`animationDidEnd` - called after animation ends  
-`didGoToLastPage` - called after animation leading to last page ends  
-`insteadOfCyclingToFirstPage` - replaces default navigation to first page after pressing next on last page  
-`insteadOfCyclingToLastPage` - replaces default navigation to last page after pressing prev on first page while navigating backwards  
-`didPressNextButton` - replaces default button action with user's custom closure  
+`.animationWillBegin` - called before animation starts  
+`.animationDidEnd` - called after animation ends  
+`.didGoToLastPage` - called after animation leading to last page ends  
+`.didChangeCurrentPage` - called after page changes  
+`.insteadOfCyclingToFirstPage` - replaces default navigation to first page after pressing next on last page  
+`.insteadOfCyclingToLastPage` - replaces default navigation to last page after pressing prev on first page while navigating backwards  
+`.didPressNextButton` - replaces default button action with user's custom closure  
   
 ## Examples
 
@@ -87,7 +93,7 @@ Drop [ConcentricOnboardingView.swift](https://github.com/exyte/ConcentricOnboard
 
 ## Requirements
 
-* iOS 13+
+* iOS 14+
 * Xcode 11+
 
 ## Acknowledgements
