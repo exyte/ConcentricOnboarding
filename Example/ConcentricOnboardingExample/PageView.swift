@@ -41,6 +41,6 @@ struct PageView: View {
                     .frame(width: 300, alignment: .center)
                     .multilineTextAlignment(.center)
             }
-        }.padding(60)
+        }
     }
 }

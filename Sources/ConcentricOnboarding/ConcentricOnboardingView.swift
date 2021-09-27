@@ -98,17 +98,21 @@ public struct ConcentricOnboardingView<Content>: View, Animatable where Content:
     private var shape: some View {
         AnimatableShape(progress: progress, radius: radius, limit: limit, direction: direction)
             .foregroundColor(circleColor)
-            .frame(width: UIScreen.main.bounds.width)
     }
     
     private var button: some View {
-        Button(action: tapAction) {
-            ZStack {
-                shape
-                nextImage
+        ZStack {
+            shape
+            Button(action: tapAction) {
+                ZStack {
+                    Circle()
+                        .foregroundColor(isAnimated ? .clear : circleColor)
+                        .frame(width: 2 * radius, height: 2 * radius)
+                    nextImage
+                }
             }
+            .disabled(isAnimated)
         }
-        .disabled(isAnimated)
         .offset(y: 300)
     }
     
