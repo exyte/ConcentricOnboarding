@@ -42,9 +42,8 @@ struct AnimatableShape: Shape {
             center = CGPoint(x: UIScreen.main.bounds.width / 2 - r + delta, y: UIScreen.main.bounds.height / 2)
         }
         
-        return Path { path in
-            path.addArc(center: center, radius: r, startAngle: .radians(0), endAngle: .radians(.pi * 2), clockwise: true)
-        }
+        let rect = CGRect(x: center.x - r, y: center.y - r, width: 2 * r, height: 2 * r)
+        return Circle().path(in: rect)
     }
     
     // MARK: - Private
