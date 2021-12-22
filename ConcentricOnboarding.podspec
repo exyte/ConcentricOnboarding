@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "ConcentricOnboarding"
-  s.version          = "1.0.0"
+  s.version          = "1.0.1"
   s.summary          = "SwiftUI library for a walkthrough or onboarding flow with tap actions"
 
   s.homepage         = 'https://github.com/exyte/ConcentricOnboarding.git'
@@ -22,7 +22,8 @@ Pod::Spec.new do |s|
   s.swift_version = "5.0"
 
   s.source_files = [
-     'Sources/**/*.swift'
+     'Source/**/*.swift',
+     'Source/*.swift'
   ]
 
 end
