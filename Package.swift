@@ -16,7 +16,7 @@ let package = Package(
     targets: [
         .target(
             name: "ConcentricOnboarding",
-            path: "Sources"
+            path: "Source"
         )
     ],
     swiftLanguageVersions: [.v5]
