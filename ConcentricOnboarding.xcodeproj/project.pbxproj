@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B4294852772ECFA00D1A973 /* ConcentricOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42947F2772ECFA00D1A973 /* ConcentricOnboardingView.swift */; };
-		5B4294862772ECFA00D1A973 /* ConcentricOnboarding.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B4294802772ECFA00D1A973 /* ConcentricOnboarding.h */; };
-		5B4294872772ECFA00D1A973 /* AnimatableShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4294822772ECFA00D1A973 /* AnimatableShape.swift */; };
-		5B4294882772ECFA00D1A973 /* AnimationCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4294832772ECFA00D1A973 /* AnimationCompletion.swift */; };
-		5B4294892772ECFA00D1A973 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B4294842772ECFA00D1A973 /* Info.plist */; };
+		5B4294912772F34C00D1A973 /* ConcentricOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42948B2772F34C00D1A973 /* ConcentricOnboardingView.swift */; };
+		5B4294922772F34C00D1A973 /* ConcentricOnboarding.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B42948C2772F34C00D1A973 /* ConcentricOnboarding.h */; };
+		5B4294932772F34C00D1A973 /* AnimatableShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42948E2772F34C00D1A973 /* AnimatableShape.swift */; };
+		5B4294942772F34C00D1A973 /* AnimationCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42948F2772F34C00D1A973 /* AnimationCompletion.swift */; };
+		5B4294952772F34C00D1A973 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B4294902772F34C00D1A973 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5B42947F2772ECFA00D1A973 /* ConcentricOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcentricOnboardingView.swift; sourceTree = "<group>"; };
-		5B4294802772ECFA00D1A973 /* ConcentricOnboarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcentricOnboarding.h; sourceTree = "<group>"; };
-		5B4294822772ECFA00D1A973 /* AnimatableShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableShape.swift; sourceTree = "<group>"; };
-		5B4294832772ECFA00D1A973 /* AnimationCompletion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationCompletion.swift; sourceTree = "<group>"; };
-		5B4294842772ECFA00D1A973 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B42948B2772F34C00D1A973 /* ConcentricOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcentricOnboardingView.swift; sourceTree = "<group>"; };
+		5B42948C2772F34C00D1A973 /* ConcentricOnboarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcentricOnboarding.h; sourceTree = "<group>"; };
+		5B42948E2772F34C00D1A973 /* AnimatableShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableShape.swift; sourceTree = "<group>"; };
+		5B42948F2772F34C00D1A973 /* AnimationCompletion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationCompletion.swift; sourceTree = "<group>"; };
+		5B4294902772F34C00D1A973 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B7DF2D12316848800C30829 /* ConcentricOnboarding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConcentricOnboarding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -34,22 +34,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5B42947E2772ECFA00D1A973 /* Source */ = {
+		5B42948A2772F34C00D1A973 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				5B42947F2772ECFA00D1A973 /* ConcentricOnboardingView.swift */,
-				5B4294802772ECFA00D1A973 /* ConcentricOnboarding.h */,
-				5B4294812772ECFA00D1A973 /* Helpers */,
-				5B4294842772ECFA00D1A973 /* Info.plist */,
+				5B42948B2772F34C00D1A973 /* ConcentricOnboardingView.swift */,
+				5B42948C2772F34C00D1A973 /* ConcentricOnboarding.h */,
+				5B42948D2772F34C00D1A973 /* Helpers */,
+				5B4294902772F34C00D1A973 /* Info.plist */,
 			);
-			path = Source;
+			path = Sources;
 			sourceTree = "<group>";
 		};
-		5B4294812772ECFA00D1A973 /* Helpers */ = {
+		5B42948D2772F34C00D1A973 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				5B4294822772ECFA00D1A973 /* AnimatableShape.swift */,
-				5B4294832772ECFA00D1A973 /* AnimationCompletion.swift */,
+				5B42948E2772F34C00D1A973 /* AnimatableShape.swift */,
+				5B42948F2772F34C00D1A973 /* AnimationCompletion.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -57,7 +57,7 @@
 		5B7DF2C72316848800C30829 = {
 			isa = PBXGroup;
 			children = (
-				5B42947E2772ECFA00D1A973 /* Source */,
+				5B42948A2772F34C00D1A973 /* Sources */,
 				5B7DF2D22316848800C30829 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,7 +78,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B4294862772ECFA00D1A973 /* ConcentricOnboarding.h in Headers */,
+				5B4294922772F34C00D1A973 /* ConcentricOnboarding.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +141,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B4294892772ECFA00D1A973 /* Info.plist in Resources */,
+				5B4294952772F34C00D1A973 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,9 +152,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B4294852772ECFA00D1A973 /* ConcentricOnboardingView.swift in Sources */,
-				5B4294872772ECFA00D1A973 /* AnimatableShape.swift in Sources */,
-				5B4294882772ECFA00D1A973 /* AnimationCompletion.swift in Sources */,
+				5B4294912772F34C00D1A973 /* ConcentricOnboardingView.swift in Sources */,
+				5B4294932772F34C00D1A973 /* AnimatableShape.swift in Sources */,
+				5B4294942772F34C00D1A973 /* AnimationCompletion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
