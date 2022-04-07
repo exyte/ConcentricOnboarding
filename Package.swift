@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "ConcentricOnboarding",
+    platforms: [
+        .iOS(.v14)
+    ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -20,9 +23,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "ConcentricOnboarding",
-            dependencies: []),
+            dependencies: [],
+            path: "Sources"),
         .testTarget(
             name: "ConcentricOnboardingTests",
             dependencies: ["ConcentricOnboarding"]),
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )
