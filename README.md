@@ -1,5 +1,5 @@
-<img src="https://github.com/exyte/ConcentricOnboarding/blob/master/header.png">
-<img align="right" src="https://raw.githubusercontent.com/exyte/ConcentricOnboarding/master/demo.gif" width="480" />
+<img src="https://raw.githubusercontent.com/exyte/media/master/common/header.png">
+<img align="right" src="https://raw.githubusercontent.com/exyte/media/master/ConcentricOnboarding/demo.gif" width="480" />
 
 <p><h1 align="left">Concentric Onboarding</h1></p>
 
@@ -71,6 +71,14 @@ To try ConcentricOnboarding examples:
 
 ## Installation
 
+### [Swift Package Manager](https://swift.org/package-manager/)
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/exyte/ConcentricOnboarding.git")
+]
+```
+
 ### [CocoaPods](http://cocoapods.org)
 
 To install `ConcentricOnboarding`, simply add the following line to your Podfile:
@@ -87,10 +95,6 @@ To integrate `ConcentricOnboarding` into your Xcode project using Carthage, spec
 github "Exyte/ConcentricOnboarding"
 ```
 
-### Manually
-
-Drop [ConcentricOnboardingView.swift](https://github.com/exyte/ConcentricOnboarding/blob/master/Source/ConcentricOnboardingView.swift) in your project.
-
 ## Requirements
 
 * iOS 14+
@@ -99,3 +103,15 @@ Drop [ConcentricOnboardingView.swift](https://github.com/exyte/ConcentricOnboard
 ## Acknowledgements
 
 Many thanks to [Cuberto team](https://dribbble.com/shots/6654320-Animated-Onboarding-Screens) for the design idea and inspiration. 
+
+## Our other open source SwiftUI libraries
+[PopupView](https://github.com/exyte/PopupView) - Toasts and popups library    
+[Grid](https://github.com/exyte/Grid) - The most powerful Grid container    
+[ScalingHeaderScrollView](https://github.com/exyte/ScalingHeaderScrollView) - A scroll view with a sticky header which shrinks as you scroll.    
+[MediaPicker](https://github.com/exyte/mediapicker) - Customizable media picker     
+[FloatingButton](https://github.com/exyte/FloatingButton) - Floating button menu    
+[ActivityIndicatorView](https://github.com/exyte/ActivityIndicatorView) - A number of animated loading indicators    
+[ProgressIndicatorView](https://github.com/exyte/ProgressIndicatorView) - A number of animated progress indicators    
+[SVGView](https://github.com/exyte/SVGView) - SVG parser    
+[LiquidSwipe](https://github.com/exyte/LiquidSwipe) - Liquid navigation animation    
+
