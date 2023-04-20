@@ -11,7 +11,6 @@
 		5B42949F2772F3D200D1A973 /* ConcentricOnboarding.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B4294992772F3D200D1A973 /* ConcentricOnboarding.h */; };
 		5B4294A02772F3D200D1A973 /* AnimatableShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42949B2772F3D200D1A973 /* AnimatableShape.swift */; };
 		5B4294A12772F3D200D1A973 /* AnimationCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42949C2772F3D200D1A973 /* AnimationCompletion.swift */; };
-		5B4294A22772F3D200D1A973 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B42949D2772F3D200D1A973 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,7 +148,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B4294A22772F3D200D1A973 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
