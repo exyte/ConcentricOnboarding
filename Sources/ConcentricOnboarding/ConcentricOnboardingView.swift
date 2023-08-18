@@ -125,7 +125,7 @@ public struct ConcentricOnboardingView<Content>: View, Animatable where Content:
     }
     
     private var currentPages: some View {
-        let maxXOffset: CGFloat = 600.0
+        let maxXOffset: CGFloat = UIScreen.main.bounds.width
         let maxYOffset: CGFloat = 40.0
         let coeff: CGFloat = direction == .forward ? -1 : 3
         
