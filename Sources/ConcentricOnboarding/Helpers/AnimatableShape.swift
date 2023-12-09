@@ -35,11 +35,11 @@ struct AnimatableShape: Shape {
         if type == .growing {
             r = CGFloat(radius + pow(2, progress))
             delta = CGFloat((1 - progress / limit) * radius)
-            center = CGPoint(x: UIScreen.main.bounds.width / 2 + r - delta - 2.0, y: UIScreen.main.bounds.height / 2)
+            center = CGPoint(x: UIScreen.main.bounds.width / 2 + r - delta - 2.0, y: rect.height / 2)
         } else {
             r = CGFloat(radius + pow(2, (limit - progress)))
             delta = CGFloat((progress / limit) * radius)
-            center = CGPoint(x: UIScreen.main.bounds.width / 2 - r + delta, y: UIScreen.main.bounds.height / 2)
+            center = CGPoint(x: UIScreen.main.bounds.width / 2 - r + delta, y: rect.height / 2)
         }
         
         let rect = CGRect(x: center.x - r, y: center.y - r, width: 2 * r, height: 2 * r)
