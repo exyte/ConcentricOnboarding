@@ -9,11 +9,11 @@
 
 <p><h4>iOS library for a walkthrough or onboarding flow with tap actions written with SwiftUI</h4></p>
 
+![](https://img.shields.io/github/v/tag/exyte/ConcentricOnboarding?label=Version)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fexyte%2FConcentricOnboarding%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/exyte/ConcentricOnboarding)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fexyte%2FConcentricOnboarding%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/exyte/ConcentricOnboarding)
-[![SPM Compatible](https://img.shields.io/badge/SwiftPM-Compatible-brightgreen.svg)](https://swiftpackageindex.com/exyte/ConcentricOnboarding)
-[![Cocoapods Compatible](https://img.shields.io/badge/cocoapods-Compatible-brightgreen.svg)](https://cocoapods.org/pods/ConcentricOnboarding)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![SPM](https://img.shields.io/badge/SPM-Compatible-brightgreen.svg)](https://swiftpackageindex.com/exyte/ConcentricOnboarding)
+[![Cocoapods](https://img.shields.io/badge/Cocoapods-Deprecated%20after%201.0.5-yellow.svg)](https://cocoapods.org/pods/ConcentricOnboarding)
 [![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](https://opensource.org/licenses/MIT)
 
 # Usage
@@ -56,11 +56,9 @@ ConcentricOnboardingView(pageContents: [<your_page>, <your_background_color>])
   
 ## Examples
 
-To try ConcentricOnboarding examples:
+To try the ConcentricOnboarding examples:
 - Clone the repo `https://github.com/exyte/ConcentricOnboarding.git`
-- Open terminal and run `cd <ConcentricOnboardingRepo>/Example/`
-- Run `pod install` to install all dependencies
-- Run open `ConcentricOnboardingExample.xcworkspace/` to open project in the Xcode
+- Open `ConcentricOnboardingExample.xcodeproj` in the Xcode
 - Try it!
 
 ## Installation
@@ -71,22 +69,6 @@ To try ConcentricOnboarding examples:
 dependencies: [
     .package(url: "https://github.com/exyte/ConcentricOnboarding.git")
 ]
-```
-
-### [CocoaPods](http://cocoapods.org)
-
-To install `ConcentricOnboarding`, simply add the following line to your Podfile:
-
-```ruby
-pod 'ConcentricOnboarding'
-```
-
-### [Carthage](http://github.com/Carthage/Carthage)
-
-To integrate `ConcentricOnboarding` into your Xcode project using Carthage, specify it in your `Cartfile`
-
-```ruby
-github "Exyte/ConcentricOnboarding"
 ```
 
 ## Requirements

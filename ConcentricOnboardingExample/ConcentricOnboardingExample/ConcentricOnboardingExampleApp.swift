@@ -2,7 +2,7 @@
 //  ConcentricOnboardingExampleApp.swift
 //  ConcentricOnboardingExample
 //
-//  Created by Daniil Manin on 20.09.2021.
+//  Created by Alisa Mylnikova on 26.03.2025.
 //
 
 import SwiftUI
