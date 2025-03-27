@@ -82,14 +82,18 @@ Many thanks to [Cuberto team](https://dribbble.com/shots/6654320-Animated-Onboar
 
 ## Our other open source SwiftUI libraries
 [PopupView](https://github.com/exyte/PopupView) - Toasts and popups library    
+[AnchoredPopup](https://github.com/exyte/AnchoredPopup) - Anchored Popup grows "out" of a trigger view (similar to Hero animation)    
 [Grid](https://github.com/exyte/Grid) - The most powerful Grid container    
-[ScalingHeaderScrollView](https://github.com/exyte/ScalingHeaderScrollView) - A scroll view with a sticky header which shrinks as you scroll  
-[AnimatedTabBar](https://github.com/exyte/AnimatedTabBar) - A tabbar with number of preset animations         
+[ScalingHeaderScrollView](https://github.com/exyte/ScalingHeaderScrollView) - A scroll view with a sticky header which shrinks as you scroll    
+[AnimatedTabBar](https://github.com/exyte/AnimatedTabBar) - A tabbar with a number of preset animations   
 [MediaPicker](https://github.com/exyte/mediapicker) - Customizable media picker     
-[Chat](https://github.com/exyte/chat) - Chat UI framework with fully customizable message cells, input view, and a built-in media picker      
-[FloatingButton](https://github.com/exyte/FloatingButton) - Floating button menu     
-[ActivityIndicatorView](https://github.com/exyte/ActivityIndicatorView) - A number of animated loading indicators     
+[Chat](https://github.com/exyte/chat) - Chat UI framework with fully customizable message cells, input view, and a built-in media picker  
+[OpenAI](https://github.com/exyte/OpenAI) Wrapper lib for [OpenAI REST API](https://platform.openai.com/docs/api-reference/introduction)    
+[AnimatedGradient](https://github.com/exyte/AnimatedGradient) - Animated linear gradient     
+[FloatingButton](https://github.com/exyte/FloatingButton) - Floating button menu    
+[ActivityIndicatorView](https://github.com/exyte/ActivityIndicatorView) - A number of animated loading indicators    
 [ProgressIndicatorView](https://github.com/exyte/ProgressIndicatorView) - A number of animated progress indicators    
+[FlagAndCountryCode](https://github.com/exyte/FlagAndCountryCode) - Phone codes and flags for every country    
 [SVGView](https://github.com/exyte/SVGView) - SVG parser    
 [LiquidSwipe](https://github.com/exyte/LiquidSwipe) - Liquid navigation animation    
 
