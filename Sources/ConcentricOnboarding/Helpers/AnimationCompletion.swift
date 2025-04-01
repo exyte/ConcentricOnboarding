@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+#if swift(<5.9)
+
 struct AnimationCompletionObserverModifier<Value>: AnimatableModifier where Value: VectorArithmetic {
     
     var animatableData: Value {
@@ -36,10 +38,11 @@ struct AnimationCompletionObserverModifier<Value>: AnimatableModifier where Valu
     }
 }
 
-
 extension View {
     
     func onAnimationCompleted<Value: VectorArithmetic>(for value: Value, completion: @escaping () -> Void) -> ModifiedContent<Self, AnimationCompletionObserverModifier<Value>> {
         return modifier(AnimationCompletionObserverModifier(observedValue: value, completion: completion))
     }
 }
+
+#endif

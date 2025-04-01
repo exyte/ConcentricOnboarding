@@ -12,6 +12,7 @@ enum Direction {
     case forward, backward
 }
 
+@MainActor
 public struct ConcentricOnboardingView<Content>: View, Animatable where Content: View {
     
     public typealias PageContent = (view: Content, background: Color)
@@ -80,9 +81,6 @@ public struct ConcentricOnboardingView<Content>: View, Animatable where Content:
             .onChange(of: currentIndex) { _ in
                 currentPageChanged()
             }
-            .onAnimationCompleted(for: progress) {
-                animationCompleted()
-            }
     }
     
     // MARK: - Private
@@ -96,7 +94,7 @@ public struct ConcentricOnboardingView<Content>: View, Animatable where Content:
     }
     
     private var shape: some View {
-        AnimatableShape(progress: progress, radius: radius, limit: limit, direction: direction)
+        AnimatableShape(progress: progress, radius: radius, limit: limit, direction: direction, screenWidth: UIScreen.main.bounds.width)
             .foregroundColor(circleColor)
     }
     
@@ -184,7 +182,21 @@ public struct ConcentricOnboardingView<Content>: View, Animatable where Content:
     private func animationCompleted() {
         if progress == limit {
             progress += 0.001
-            withAnimation(outAnimation) { progress = 2 * limit }
+
+            if #available(iOS 17.0, *) {
+#if swift(>=5.9)
+                withAnimation(outAnimation) {
+                    progress = 2 * limit
+                } completion: {
+                    animationCompleted()
+                }
+#else
+                withAnimation(outAnimation) { progress = 2 * limit }
+#endif
+            } else {
+                withAnimation(outAnimation) { progress = 2 * limit }
+            }
+
             updateColors(forNextPage: true)
         } else if progress == 2 * limit {
             direction == .forward ? goToNextPageUnanimated() : goToPrevPageUnanimated()
@@ -227,7 +239,20 @@ public struct ConcentricOnboardingView<Content>: View, Animatable where Content:
         isAnimated = true
         updateColors()
         progress = 0
-        withAnimation(inAnimation) { progress = limit }
+
+        if #available(iOS 17.0, *) {
+#if swift(>=5.9)
+            withAnimation(inAnimation) {
+                progress = limit
+            } completion: {
+                animationCompleted()
+            }
+#else
+            withAnimation(inAnimation) { progress = limit }
+#endif
+        } else {
+            withAnimation(inAnimation) { progress = limit }
+        }
     }
     
     private func updateColors(forNextPage: Bool = false) {
